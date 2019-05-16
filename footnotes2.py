@@ -425,4 +425,4 @@ class FootnotePostprocessor(Postprocessor):
 
 def makeExtension(**kwargs):  # pragma: no cover
     """ Return an instance of the FootnoteExtension """
-return FootnoteExtension(**kwargs)
+    return FootnoteExtension(**kwargs)
