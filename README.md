@@ -18,4 +18,4 @@ Additional options:
 
 `USE_LETTERS`: Use letters (a-z) instead of numbers as footnote markers. Defaults to `False`.
 
-`DUPLICATE_BACKLINKS`: Show multiple backlinks if footnote is used multiple times. Defaults to `True`.
+`SHOW_BACKLINKS`: Enable or disable backlinks from the footnote to the reader's place. Defaults to `True`.
