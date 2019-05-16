@@ -63,10 +63,10 @@ class FootnoteExtension(Extension):
                 [False,
                  "Use letters (a-z) instead of numbers"
                  "as footnote markers."],
-            'DUPLICATE_BACKLINKS':
+            'SHOW_BACKLINKS':
                 [True,
-                 "Show multiple backlinks if footnote"
-                 "is used multiple times."]
+                 "Enable or disable backlinks"
+                 "from the footnote to the reader's place."]
         }
         super(FootnoteExtension, self).__init__(**kwargs)
 
@@ -194,6 +194,7 @@ class FootnoteExtension(Extension):
             for el in list(surrogate_parent):
                 li.append(el)
                 surrogate_parent.remove(el)
+            if self.getConfig("SHOW_BACKLINKS"):
                 backlink = util.etree.Element("a")
                 backlink.set("href", "#" + self.makeFootnoteRefId(id))
                 backlink.set("class", "footnote-backref")
@@ -223,13 +224,9 @@ class FootnotePreprocessor(Preprocessor):
     def run(self, lines):
         """
         Loop through lines and find, set, and remove footnote definitions.
-
         Keywords:
-
         * lines: A list of lines of text
-
         Return: A list of lines of text with footnote definitions removed.
-
         """
         newlines = []
         i = 0
@@ -255,13 +252,9 @@ class FootnotePreprocessor(Preprocessor):
 
     def detectTabbed(self, lines):
         """ Find indented text and remove indent before further proccesing.
-
         Keyword arguments:
-
         * lines: an array of strings
-
         Returns: a list of post processed items and the index of last line.
-
         """
         items = []
         blank_line = False  # have we encountered a blank line yet?
@@ -380,7 +373,7 @@ class FootnotePostTreeprocessor(Treeprocessor):
             # Check number of duplicates footnotes and insert
             # additional links if needed.
             count = self.get_num_duplicates(li)
-            if count > 1 and self.footnotes.getConfig("DUPLICATE_BACKLINKS"):
+            if count > 1:
                 self.add_duplicates(li, count)
 
     def run(self, root):
@@ -432,4 +425,4 @@ class FootnotePostprocessor(Postprocessor):
 
 def makeExtension(**kwargs):  # pragma: no cover
     """ Return an instance of the FootnoteExtension """
-    return FootnoteExtension(**kwargs)
+return FootnoteExtension(**kwargs)
