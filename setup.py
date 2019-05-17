@@ -4,9 +4,9 @@
 from setuptools import setup
 setup(
     name='mdx-footnotes2',
-    version='0.1.0',
-    author='Lars Wilhelmer',
-    author_email='lars@wilhelmer.de',
+    version='0.2.0',
+    author='Manfred Stienstra, Yuri takhteyev and Waylan limberg',
+    author_email='waylan.limberg@icloud.com',
     description='The official Python markdown "footnotes" extension, with additional options.',
     url='https://github.com/wilhelmer/mdx-footnotes2',
     py_modules=['footnotes2'],
